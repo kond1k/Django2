@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic.base import View
 
-from .models import Category
+from .models import Category, Post
 
 
 def home(request):
@@ -11,12 +11,20 @@ def home(request):
 
 class HomeView(View):
     def get(self, request):
-        category_list = Category.objects.all()
-        context = {"categories": category_list}
+        posts_list = Post.objects.all()
+        context = {"posts": posts_list}
         return render(request, "blog/home.html", context)
 
     def post(self, request):
         pass
+
+
+class PostView(View):
+    """Вывод поста"""
+
+    def get(self, request, post_name):
+        post = Post.objects.get(slug=post_name)
+        return render(request, "blog/post_list.html", {"post": post})
 
 
 class CategoryView(View):
