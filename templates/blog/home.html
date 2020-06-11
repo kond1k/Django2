@@ -8,8 +8,8 @@
 </head>
 
 <body>
-    {% for category in categories %}
-    <p><a href="{% url 'category' category.slug %}">{{ category.slug }}</a></p>
+    {% for post in posts %}
+    <p><a href="{% url 'post' post.slug %}">{{ post.slug }}</a></p>
     {% endfor %}
 </body>
 
